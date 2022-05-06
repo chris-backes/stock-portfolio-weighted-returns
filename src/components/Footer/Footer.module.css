@@ -1,0 +1,24 @@
+footer {
+	justify-content: space-between;
+	display: flex;
+	color: var(--secondary);
+	font-size: larger;
+}
+footer nav {
+	display: flex;
+	justify-content: space-evenly;
+}
+footer nav a {
+	padding: 10px;
+	margin: auto 10px;
+	text-decoration: none;
+	color: var(--secondary);
+	font-size: 1em;
+	transition: 0.5s;
+}
+
+footer nav a:hover {
+	color: var(--quartenary);
+	font-size: 1.1em;
+	transition: 0.5s;
+}
