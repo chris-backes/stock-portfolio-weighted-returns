@@ -1,29 +1,26 @@
 import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { library } from "@fortawesome/fontawesome-svg-core";
-import { fab } from "@fortawesome/free-brands-svg-icons";
-import styles from './Footer.module.css'
-
-library.add(fab);
+import { faLinkedin, faGithub, faStackOverflow, faYoutube } from "@fortawesome/free-brands-svg-icons";
+import styles from "./Footer.module.css";
 
 function Footer() {
 	return (
 		<footer>
-            <h2>By Chris Backes</h2>
+			<h2>By Chris Backes</h2>
 			<nav>
 				<a
 					href="https://github.com/chris-backes"
 					target="_blank"
 					rel="noreferrer"
 				>
-					<FontAwesomeIcon icon={["fab", "github"]} size="3x" />{" "}
+					<FontAwesomeIcon icon={faGithub} size="3x" />{" "}
 				</a>
 				<a
 					href="https://www.linkedin.com/in/christopher-backes-2b7513169/"
 					target="_blank"
 					rel="noreferrer"
 				>
-					<FontAwesomeIcon icon={["fab", "linkedin"]} size="3x" />{" "}
+					<FontAwesomeIcon icon={faLinkedin} size="3x" />{" "}
 				</a>
 				<a
 					href="https://stackoverflow.com/users/17331548/chris-backes"
@@ -31,7 +28,7 @@ function Footer() {
 					rel="noreferrer"
 				>
 					<FontAwesomeIcon
-						icon="fa-brands fa-stack-overflow"
+						icon={faStackOverflow}
 						size="3x"
 					/>{" "}
 				</a>
@@ -40,11 +37,11 @@ function Footer() {
 					target="_blank"
 					rel="noreferrer"
 				>
-					<FontAwesomeIcon icon={["fab", "youtube"]} size="3x" />{" "}
+					<FontAwesomeIcon icon={faYoutube} size="3x" />{" "}
 				</a>
 			</nav>
 		</footer>
 	);
 }
 
-export default Footer
+export default Footer;

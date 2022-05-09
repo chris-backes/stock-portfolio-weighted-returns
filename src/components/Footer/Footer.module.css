@@ -8,7 +8,7 @@ footer nav {
 	display: flex;
 	justify-content: space-evenly;
 }
-footer nav a {
+a {
 	padding: 10px;
 	margin: auto 10px;
 	text-decoration: none;
@@ -17,7 +17,7 @@ footer nav a {
 	transition: 0.5s;
 }
 
-footer nav a:hover {
+a:hover {
 	color: var(--quartenary);
 	font-size: 1.1em;
 	transition: 0.5s;

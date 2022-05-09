@@ -1,0 +1,14 @@
+.containingEl {
+    margin: 2px;
+    min-width: 600px;
+    background-color: var(--tertiary);
+}
+
+.cellEl {
+    color: var(--quintenary) !important
+}
+
+.cellHeadEl {
+    color: var(--quintenary) !important;
+    font-weight: bolder !important;
+}

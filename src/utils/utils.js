@@ -1,12 +1,11 @@
 export function convertToMoney(num) {
-	// let i = num.length
-	// console.log(i)
-	// while (i > 0) {
-	//     i = i - 3
-	//     if (i > 0) {
-	//         num = num.slice(0, i) + "," + num.slice(i)
-	//     }
-	// }
+	let i = num.length
+	while (i > 0) {
+	    i = i - 3
+	    if (i > 0) {
+	        num = num.slice(0, i) + "," + num.slice(i)
+	    }
+	}
 	return "$" + num + (num.indexOf(".") !== -1 ? "" : ".00");
 }
 

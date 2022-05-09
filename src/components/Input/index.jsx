@@ -1,52 +1,97 @@
-import React from "react";
-import data from "../../assets/data.js";
-import { convertToMoney } from "../../utils/utils.js";
-import Table from "@mui/material/Table";
-import TableBody from "@mui/material/TableBody";
-import TableCell from "@mui/material/TableCell";
-import TableContainer from "@mui/material/TableContainer";
-import TableHead from "@mui/material/TableHead";
-import TableRow from "@mui/material/TableRow";
+import React, { useState } from "react";
+import { Backdrop, Box, Modal, Fade, Button, TextField } from "@mui/material";
 
 import styles from "./Input.module.css";
 
-const Input = () => {
-	let displayData = data.map((i) => {
-		const temp = convertToMoney(i.amount);
-		return {
-			deposit: i.deposit,
-			amount: temp,
-		};
+const style = {
+	position: "absolute",
+	top: "50%",
+	left: "50%",
+	transform: "translate(-50%, -50%)",
+	maxWidth: 700,
+	bgcolor: "background.paper",
+	border: "2px solid #000",
+	boxShadow: 24,
+	p: 4,
+};
+
+function Input(storage) {
+	const [open, setOpen] = useState(false);
+	const handleOpen = () => setOpen(true);
+	const handleClose = () => setOpen(false);
+
+	const [formVals, setFormVals] = useState({
+		deposit: "",
+		amount: "",
 	});
 
+	const handleChange = (e) => {
+		const { name, value } = e.target;
+		setFormVals({
+			...formVals,
+			[name]: value,
+		});
+	};
+
+	const handleSubmit = (event) => {
+		event.preventDefault();
+		console.log(formVals);
+	};
+
+	const setStorage = (deposit, amount) => {
+		let res = JSON.parse(localStorage.getItem("transactions"));
+
+		res.push({ deposit, amount });
+		localStorage.setItem("transactions", JSON.stringify(res));
+	};
+
 	return (
-		<TableContainer
-			sx={{
-				boxShadow: 10,
-				borderRadius: 2,
-				p: 3,
-				maxWidth: 800,
-			}}
-			className={styles.containingEl}
-		>
-			<Table>
-				<TableHead>
-					<TableRow>
-						<TableCell className={styles.cellHeadEl}>Date</TableCell>
-						<TableCell className={styles.cellHeadEl}>Amount</TableCell>
-					</TableRow>
-				</TableHead>
-				<TableBody>
-					{displayData.map((i, x) => (
-						<TableRow key={x}>
-							<TableCell className={styles.cellEl}>{i.deposit}</TableCell>
-							<TableCell className={styles.cellEl}>{i.amount}</TableCell>
-						</TableRow>
-					))}
-				</TableBody>
-			</Table>
-		</TableContainer>
+		<div>
+			<Button className={styles.btnEl} onClick={handleOpen}>
+				Add new deposit
+			</Button>
+			<Modal
+				aria-labelledby="transition-modal-title"
+				aria-describedby="transition-modal-description"
+				open={open}
+				onClose={handleClose}
+				closeAfterTransition
+				BackdropComponent={Backdrop}
+				BackdropProps={{
+					timeout: 500,
+				}}
+			>
+				<Fade in={open}>
+						<Box
+							component="form"
+							sx={style}
+							noValidate
+							autoComplete="off"
+						>
+							<TextField
+								id="deposit"
+								label="Date"
+								value={formVals.deposit}
+								onChange={handleChange}
+							/>
+							<TextField
+								id="amount"
+								label="Amount"
+								value={formVals.amount}
+								onChange={handleChange}
+							/>
+							<Button
+								variant="contained"
+								type="submit"
+								onClick={handleSubmit}
+							>
+								Submit
+							</Button>
+						</Box>
+				</Fade>
+			</Modal>
+		</div>
 	);
-};
+}
 
 export default Input;
