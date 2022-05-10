@@ -10,9 +10,9 @@ The formula for annualized returns is:
 
 *where z is the the days which the portfolio has been held*
 
-<img style="background-color: white; padding: 5px" src="https://render.githubusercontent.com/render/math?math=(x/y)^{365/z}-1">
+![Equation](https://math.vercel.app/?bgcolor=auto&from=%28x%2Fy%29%5E%7B365%2Fz%7D-1.svg)
 
-The formula is modifed in two twos ways:
+The formula is modifed in twos ways:
 - The initial value is the sum of the deposits made
 - The days held is the average days in the portfolio of all dollars
 
@@ -22,10 +22,11 @@ It is not the simple average of all deposit dates, as larger deposit amounts wil
 
 *where n is a given deposit in that set*
 
-*where x is the amount of days in between the current day and when the given deposit was made*
+*where n<sub>x</sub> is the amount of days in between the current day and when the given deposit was made*
 
-*where y the amount of a given deposit*
+*where n<sub>y</sub> the amount of a given deposit*
 
 *where Y is the sum all deposit amounts*
 
-<img style="background-color: white; padding: 5px" src="https://math.vercel.app?bgcolor=auto&from=\sum_{n \in K}x \times (y \div Y)" />
+![Equation](https://math.vercel.app/?bgcolor=auto&from=%5Csum_%7Bn%20%5Cin%20K%7Dn_x%20%5Ctimes%20%28n_y%20%5Cdiv%20Y%29.svg)
+
