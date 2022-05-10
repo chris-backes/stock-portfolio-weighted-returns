@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Backdrop, Box, Modal, Fade, Button, TextField } from "@mui/material";
-
+import { setDate, setMoney } from '../../utils/utils.js'
 import styles from "./Input.module.css";
 
 const style = {
@@ -15,7 +15,7 @@ const style = {
 	p: 4,
 };
 
-function Input(storage) {
+function Input() {
 	const [open, setOpen] = useState(false);
 	const handleOpen = () => setOpen(true);
 	const handleClose = () => setOpen(false);
@@ -24,6 +24,16 @@ function Input(storage) {
 		deposit: "",
 		amount: "",
 	});
+
+	const setStorage = ({ deposit, amount }) => {
+		let res = JSON.parse(localStorage.getItem("transactions"));
+
+		let newDep = setDate(deposit)
+		let newAmt = setMoney(amount)
+
+		res.push({ deposit: newDep, amount: newAmt });
+		localStorage.setItem("transactions", JSON.stringify(res));
+	};
 
 	const handleChange = (e) => {
 		const { name, value } = e.target;
@@ -35,14 +45,7 @@ function Input(storage) {
 
 	const handleSubmit = (event) => {
 		event.preventDefault();
-		console.log(formVals);
-	};
-
-	const setStorage = (deposit, amount) => {
-		let res = JSON.parse(localStorage.getItem("transactions"));
-
-		res.push({ deposit, amount });
-		localStorage.setItem("transactions", JSON.stringify(res));
+		setStorage(formVals)
 	};
 
 	return (
@@ -68,16 +71,16 @@ function Input(storage) {
 							noValidate
 							autoComplete="off"
 						>
-							<TextField
+							<TextField fullWidth
 								id="deposit"
 								label="Date"
-								value={formVals.deposit}
+								name='deposit'
 								onChange={handleChange}
 							/>
-							<TextField
+							<TextField fullWidth
 								id="amount"
 								label="Amount"
-								value={formVals.amount}
+								name='amount'
 								onChange={handleChange}
 							/>
 							<Button
