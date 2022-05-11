@@ -10,13 +10,16 @@ export function convertToMoney(num) {
 }
 
 export function formatDate(str) {
+	if (str.getDay() === 0) str = new Date(str.setDate(str.getDate() - 2))
+	if (str.getDay() === 6) str = new Date(str.setDate(str.getDate() - 1))
+	let month = str.getMonth() + 1
 	return (
 		str.getFullYear().toString() +
-		"/" +
-		(str.getMonth().toString().length === 1
-			? "0" + str.getMonth().toString()
-			: str.getMonth().toString()) +
-		"/" +
+		"-" +
+		(month < 10
+			? "0" + month.toString()
+			: month.toString()) +
+		"-" +
 		(str.getDate().toString().length === 1
 			? "0" + str.getDate().toString()
 			: str.getDate().toString())

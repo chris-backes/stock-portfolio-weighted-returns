@@ -7,49 +7,49 @@ import {
 	formatDate,
 	getWeightedDate,
 } from "../../utils/utils.js";
+import Explanation from "../Explanation";
+
+import styles from './WeightedReturn.module.css'
 
 const WeightedReturn = (curr) => {
 	if (typeof curr !== "number") curr = 27521.18;
 
 	const [averageWeighted, principal] = convertData(data);
 
-	const [spyStartAmount, setSpyStartAmount] = useState("");
 	const [spyWeightedAmount, setSpyWeightedAmount] = useState("");
 	const [spyCurrAmount, setSpyCurrAmount] = useState("");
 
-	const [nasdaqStartAmount, setNasdaqStartAmount] = useState("");
 	const [nasdaqWeightedAmount, setNasdaqWeightedAmount] = useState("");
 	const [nasdaqCurrAmount, setNasdaqCurrAmount] = useState("");
 
-	const spyStartDate = getOldestDate(data.map((i) => i.deposit));
-	const sypWeightedDate = getWeightedDate(Math.floor(averageWeighted));
-	const today = formatDate(new Date());
+	const absoluteStart = getOldestDate(data.map((i) => i.deposit));
+	const weightedStart = getWeightedDate(Math.floor(averageWeighted));
+	const todayish = formatDate(new Date(new Date().setDate(new Date().getDate()-1))); //get yesterday's close becasue otherwise I'd either need to write separate funcitons for different points in the day or it wouldn't work outside of 5 PM to Midnight
 
-	function useEffectWrapper(data, sign, setFunc) {
+	function useEffectWrapper(timeStamp, sign, setFunc) {
 		useEffect(() => {
-			let apiUrl = `https://api.polygon.io/v2/aggs/ticker/${sign}/range/1/day/${data}/${data}?adjusted=true&sort=asc&limit=120&apiKey=YHMpZffc6SJ6Ph0zhL1gNQzSUzWYE0KG`;
+			let apiUrl = `https://api.polygon.io/v2/aggs/ticker/${sign}/range/1/day/${timeStamp}/${timeStamp}?adjusted=true&sort=asc&limit=120&apiKey=YHMpZffc6SJ6Ph0zhL1gNQzSUzWYE0KG`;
 			fetch(apiUrl)
 				.then(function (response) {
 					if (response.ok) {
-						response.json().then(function (data) {
-							setFunc(data.results[0].c);
+						response.json().then(function (res) {
+							setFunc(res.results[0].c);
+							
 						});
 					} else {
-						console.log("could not find " + sign + " for " + data);
+						console.log("could not find " + sign + " for " + timeStamp);
 					}
 				})
 				.catch(function (err) {
 					console.log(err);
 				});
-		}, [data, sign, setFunc]);
+		}, [timeStamp, sign, setFunc]);
 	}
-	useEffectWrapper(today, "SPY", setSpyCurrAmount);
-	useEffectWrapper(spyStartDate, "SPY", setSpyStartAmount);
-	useEffectWrapper(sypWeightedDate, "SPY", setSpyWeightedAmount);
+	useEffectWrapper(todayish, "SPY", setSpyCurrAmount);
+	useEffectWrapper(weightedStart, "SPY", setSpyWeightedAmount);
 
-	useEffectWrapper(today, "QQQ", setNasdaqCurrAmount);
-	useEffectWrapper(spyStartDate, "QQQ", setNasdaqStartAmount);
-	useEffectWrapper(sypWeightedDate, "QQQ", setNasdaqWeightedAmount);
+	useEffectWrapper(todayish, "QQQ", setNasdaqCurrAmount);
+	useEffectWrapper(weightedStart, "QQQ", setNasdaqWeightedAmount);
 
 	const weightedReturn = (curr / principal) ** (365 / averageWeighted) * 100;
 	const totalReturn = (curr / principal) * 100;
@@ -59,20 +59,14 @@ const WeightedReturn = (curr) => {
 	const nasdaqWeightedReturnAnnualized =
 		(nasdaqCurrAmount / nasdaqWeightedAmount) ** (365 / averageWeighted) *
 		100;
-	console.log([nasdaqWeightedAmount, nasdaqCurrAmount, nasdaqWeightedAmount]);
 	const spyWeightedReturnTotal = (spyCurrAmount / spyWeightedAmount) * 100;
 	const nasdaqWeightedReturnTotal =
-		(nasdaqCurrAmount / nasdaqWeightedAmount) ** 100;
-
-	// const spyStartReturnAnnualized = (spyCurrAmount / spyStartAmount) ** (365 / ) * 100;
-	const spyStartReturnTotal = (spyCurrAmount / spyStartAmount) * 100;
-	const nasdaqStartReturnTotal = (nasdaqCurrAmount / nasdaqStartAmount) * 100
+		(nasdaqCurrAmount / nasdaqWeightedAmount) * 100;
 
 	return (
-		<article>
+		<section>
 			<p>
-				You have invested {convertToMoney(principal.toString())} since
-				starting
+				You have invested {convertToMoney(principal.toString())} since you started investing on {absoluteStart.slice(5) + "-" + absoluteStart.slice(0, 4)}
 			</p>
 			<p>
 				Your portfolio has returned {totalReturn.toFixed(2).slice(1)}%
@@ -92,13 +86,8 @@ const WeightedReturn = (curr) => {
 				annualized return of{" "}
 				{nasdaqWeightedReturnAnnualized.toFixed(2).slice(1)}%.
 			</p>
-			{/* <p>
-					Since the inception of your portfolio, the S&P has returned{" "}
-					{spyStartReturnTotal.toFixed(2).slice(1)}%, with an
-					annualized return of{" "}
-					{spyStartReturnAnnualized.toFixed(2).slice(1)}%.
-				</p> */}
-		</article>
+			<Explanation />
+		</section>
 	);
 };
 

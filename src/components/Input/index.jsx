@@ -49,7 +49,7 @@ function Input() {
 	};
 
 	return (
-		<div>
+		<div className={styles.divEl}>
 			<Button className={styles.btnEl} onClick={handleOpen}>
 				Add new deposit
 			</Button>

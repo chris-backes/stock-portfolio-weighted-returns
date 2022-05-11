@@ -21,9 +21,9 @@ function Explanation() {
 	const handleClose = () => setOpen(false);
 
 	return (
-		<div>
+		<div className={styles.divEl}>
 			<Button className={styles.btnEl} onClick={handleOpen}>
-				Open modal
+				How it works
 			</Button>
 			<Modal
 				aria-labelledby="transition-modal-title"

@@ -18,5 +18,5 @@ export function convertData(arr) {
         res+=(parseInt(arr[i].amount) / sum) * parseInt(temp[i])
     }
 
-    return [res, sum]
+    return [Math.floor(res), sum]
 }

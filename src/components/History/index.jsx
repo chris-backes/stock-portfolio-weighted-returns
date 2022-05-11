@@ -30,7 +30,7 @@ const History = () => {
 			}}
 			className={styles.containingEl}
 		>
-			<Input />
+			<Input/>
 			<Table>
 				<TableHead>
 					<TableRow>

@@ -1,6 +1,12 @@
+.divEl {
+    display: flex;
+    justify-content: center;
+}
+
 .btnEl {
 	background-color: var(--quintenary) !important;
 	color: var(--primary) !important;
+    opacity: 1;
     transition: 0.5s;
 }
 
