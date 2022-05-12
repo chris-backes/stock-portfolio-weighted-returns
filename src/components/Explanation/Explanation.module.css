@@ -4,13 +4,13 @@
 }
 
 .btnEl {
-	background-color: var(--quintenary) !important;
-	color: var(--primary) !important;
-    transition: 0.5s;
+	background-color: var(--secondary) !important;
+	color: white !important;
+    transition: 0.75s;
 }
 
 .btnEl:hover {
-    background-color: var(--primary) !important;
-	color: var(--quintenary) !important;
-    transition: 0.5s
+    background-color: white !important;
+	color: var(--secondary) !important;
+    transition: 0.75s
 }

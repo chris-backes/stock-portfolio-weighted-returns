@@ -1,7 +1,8 @@
 export function convertToMoney(num) {
 	let i = num.length;
+	if (num.indexOf('.') !== -1) i -= 3
 	while (i > 0) {
-		i = i - 3;
+		i -= 3;
 		if (i > 0) {
 			num = num.slice(0, i) + "," + num.slice(i);
 		}

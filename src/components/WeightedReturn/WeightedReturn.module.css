@@ -5,3 +5,6 @@ section {
     min-width: 50vw;
     font-weight: lighter;
 }
+p {
+    font-size: 1.5rem;
+}

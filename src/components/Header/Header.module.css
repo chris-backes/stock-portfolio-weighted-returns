@@ -1,0 +1,12 @@
+header {
+    padding: max(0px, min(8px, calc((100vw - 4px - 100%)
+    * 9999)));
+    font-weight: bold;
+    background: linear-gradient(333deg, rgba(178,58,72,0.5) 0%, rgba(72,202,228,0.5) 27%, rgba(225,206,122,0.5) 85%);
+    margin: 0;
+    border-bottom: 5px solid var(--quintenary)
+  }
+  header h1 {
+    text-align: center;
+    font-size: 3.5rem;
+  }

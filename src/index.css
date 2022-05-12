@@ -1,41 +1,31 @@
-@import url('https://fonts.googleapis.com/css2?family=Radio+Canada:wght@300;400;500;600;700&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Radio+Canada:wght@300;400;500;600;700&display=swap");
 
-:root{
-  --primary: #48CAE4;
-  --secondary: #B23A48;
-  --tertiary: #EBCFB2;
-  --quartenary: #E1CE7A;
-  --quintenary: #424B54;
+:root {
+	--primary: #48cae4;
+	--secondary: #b23a48;
+	--tertiary: #ebcfb2;
+	--quartenary: #e1ce7a;
+	--quintenary: #424b54;
+}
+html {
+	font-size: 100%;
 }
 
 body {
-  margin: 0;
-  font-family: 'Radio Canada', sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  color: var(--quintenary)
+	margin: 0;
+	font-family: "Radio Canada", sans-serif;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+	color: var(--quintenary);
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
-}
 main {
-  display: flex;
-  padding: 10px;
-  justify-content: space-between;
-  margin: max(0px, min(8px, calc((100vw - 4px - 100%)
-  * 9999)))
+	display: flex;
+	padding: 10px;
+	justify-content: space-between;
+	padding: max(0px, min(8px, calc((100vw - 4px - 100%) * 9999)));
 }
-header {
-  margin: max(0px, min(8px, calc((100vw - 4px - 100%)
-  * 9999)));
-  font-weight: bold;
-}
-header h1 {
-  text-align: center;
-}
+
 footer {
-  margin: max(0px, min(8px, calc((100vw - 4px - 100%)
-  * 9999)))
+	padding: max(0px, min(8px, calc((100vw - 4px - 100%) * 9999)));
 }

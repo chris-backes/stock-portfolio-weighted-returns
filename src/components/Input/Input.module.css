@@ -1,17 +1,16 @@
 .divEl {
     display: flex;
-    justify-content: center;
+    justify-content: space-evenly;
 }
 
 .btnEl {
-	background-color: var(--quintenary) !important;
-	color: var(--primary) !important;
-    opacity: 1;
-    transition: 0.5s;
+	background-color: var(--secondary) !important;
+	color: var(--tertiary) !important;
+    transition: 0.75s;
 }
 
 .btnEl:hover {
-    background-color: var(--primary) !important;
-	color: var(--quintenary) !important;
-    transition: 0.5s
+    background-color: var(--tertiary) !important;
+	color: var(--secondary) !important;
+    transition: 0.75s
 }
