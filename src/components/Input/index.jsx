@@ -1,6 +1,15 @@
 import React, { useState } from "react";
-import { Backdrop, Box, Modal, Fade, Button, TextField } from "@mui/material";
-import { setDate, setMoney } from '../../utils/utils.js'
+import {
+	Button,
+	Backdrop,
+	TextField,
+	Dialog,
+	DialogActions,
+	DialogContent,
+	DialogContentText,
+	DialogTitle,
+} from "@mui/material";
+import { setDate, setMoney } from "../../utils/utils.js";
 import styles from "./Input.module.css";
 
 const style = {
@@ -8,14 +17,15 @@ const style = {
 	top: "50%",
 	left: "50%",
 	transform: "translate(-50%, -50%)",
-	maxWidth: 700,
+	maxWidth: 800,
+	minWidth: 500,
 	bgcolor: "background.paper",
 	border: "2px solid #000",
 	boxShadow: 24,
 	p: 4,
 };
 
-function Input() {
+function Input({ setTransactionHistory }) {
 	const [open, setOpen] = useState(false);
 	const handleOpen = () => setOpen(true);
 	const handleClose = () => setOpen(false);
@@ -28,10 +38,18 @@ function Input() {
 	const setStorage = ({ deposit, amount }) => {
 		let res = JSON.parse(localStorage.getItem("transactions"));
 
-		let newDep = setDate(deposit)
-		let newAmt = setMoney(amount)
+		let newDep = setDate(deposit);
+		let newAmt = setMoney(amount);
 
-		res.push({ deposit: newDep, amount: newAmt });
+		res
+			? res.push({ deposit: newDep, amount: newAmt })
+			: (res = [{ deposit: newDep, amount: newAmt }]);
+		
+		//data gets sorted by date of the deposit. converting to Date object is probably suboptimal, but simple
+		res.sort((a, b) => new Date(a.deposit) - new Date(b.deposit))
+		//re-render the page
+		setTransactionHistory(res)
+		//put into memory
 		localStorage.setItem("transactions", JSON.stringify(res));
 	};
 
@@ -45,7 +63,8 @@ function Input() {
 
 	const handleSubmit = (event) => {
 		event.preventDefault();
-		setStorage(formVals)
+		setStorage(formVals);
+		handleClose();
 	};
 
 	return (
@@ -53,46 +72,51 @@ function Input() {
 			<Button className={styles.btnEl} onClick={handleOpen}>
 				Add new deposit
 			</Button>
-			<Modal
-				aria-labelledby="transition-modal-title"
-				aria-describedby="transition-modal-description"
+			<Dialog
 				open={open}
 				onClose={handleClose}
-				closeAfterTransition
 				BackdropComponent={Backdrop}
 				BackdropProps={{
 					timeout: 500,
 				}}
 			>
-				<Fade in={open}>
-						<Box
-							component="form"
-							sx={style}
-							noValidate
-							autoComplete="off"
-						>
-							<TextField fullWidth
-								id="deposit"
-								label="Date"
-								name='deposit'
-								onChange={handleChange}
-							/>
-							<TextField fullWidth
-								id="amount"
-								label="Amount"
-								name='amount'
-								onChange={handleChange}
-							/>
-							<Button
-								variant="contained"
-								type="submit"
-								onClick={handleSubmit}
-							>
-								Submit
-							</Button>
-						</Box>
-				</Fade>
-			</Modal>
+				<DialogTitle>Add another deposit</DialogTitle>
+				<DialogContent>
+					<DialogContentText sx={{ mb: 3 }}>
+						Input the date as 'mm/dd/yyyy' and the monetary amount
+						is USD, without the dollar symbol or commas (either with
+						or without decimal/cents)
+					</DialogContentText>
+					<TextField
+						sx={{ my: 1 }}
+						fullWidth
+						id="deposit"
+						label="Date"
+						name="deposit"
+						onChange={handleChange}
+					/>
+					<TextField
+						sx={{ my: 1 }}
+						fullWidth
+						id="amount"
+						label="Amount"
+						name="amount"
+						onChange={handleChange}
+					/>
+				</DialogContent>
+				<DialogActions>
+					<Button
+						variant="contained"
+						type="submit"
+						onClick={handleSubmit}
+					>
+						Submit
+					</Button>
+					<Button variant="contained" onClick={handleClose}>
+						Cancel
+					</Button>
+				</DialogActions>
+			</Dialog>
 		</div>
 	);
 }

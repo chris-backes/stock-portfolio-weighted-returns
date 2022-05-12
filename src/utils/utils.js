@@ -42,18 +42,24 @@ export function setDate(deposit) {
 	let res = deposit.replace(/-/g, "/");
 	if (
 		res.match(
-			/^(((0[1-9]|[12][0-9]|3[01])[- /.](0[13578]|1[02])|(0[1-9]|[12][0-9]|30)[- /.](0[469]|11)|(0[1-9]|1\d|2[0-8])[- /.]02)[- /.]\d{4}|29[- /.]02[- /.](\d{2}(0[48]|[2468][048]|[13579][26])|([02468][048]|[1359][26])00))$/
+			/^((0[1-9]|1[012]|[1-9])[- /.](0[1-9]|[12][0-9]|3[01]|[1-9])[- /.](19|20)\d\d|(19|20)\d\d[- /.](0[1-9]|1[012]|[1-9])[- /.](0[1-9]|[12][0-9]|3[01]|[1-9]))$/
 		)
 	) {
-		return deposit;
+		let temp = res.split('/')
+		if (temp[0].charAt(0) === "0") temp[0] = temp[0].substring(1)
+		if (temp[1].charAt(0) === "0") temp[1] = temp[1].substring(1)
+		return res;
 	}
-	return window.alert("The date should be formatted mm/dd/yyyy");
+	window.alert("The date should be formatted mm/dd/yyyy");
+	throw new Error('something went wrong')
 }
 
 export function setMoney(amount) {
 	if (amount.charAt(0) === '$') amount = amount.substring(1)
-	if (amount.match(/[0-9]+(\.[0-9]{2})?/)) {
-		return amount;
+	let res = amount.replace(/,/g, "")
+	if (res.match(/[0-9]+(\.[0-9]{2})?/)) {
+		return res;
 	}
-	return window.alert("Dollar ammounts must be of the form xxxx or xxxx.xx");
+	window.alert("Dollar amounts must be of the form xxxx or xxxx.xx");
+	throw new Error('something went wrong')
 }
