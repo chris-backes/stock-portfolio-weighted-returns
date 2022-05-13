@@ -9,4 +9,6 @@ header {
   header h1 {
     text-align: center;
     font-size: 3.5rem;
+    margin-left: 50px;
+    margin-right: 50px;
   }

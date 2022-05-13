@@ -38,8 +38,7 @@ const History = ({ setPortfolio }) => {
 			sx={{
 				boxShadow: 10,
 				borderRadius: 2,
-				p: 3,
-				maxWidth: 800,
+				p: 1
 			}}
 			className={styles.containingEl}
 		>
