@@ -12,6 +12,7 @@ import Explanation from "../Explanation";
 import styles from "./WeightedReturn.module.css";
 
 const WeightedReturn = ({ portfolio }) => {
+
 	const [averageWeighted, principal] = convertData(data);
 
 	const [spyWeightedAmount, setSpyWeightedAmount] = useState("");
@@ -54,8 +55,8 @@ const WeightedReturn = ({ portfolio }) => {
 
 	//personal portfolio
 	const weightedReturn =
-		(portfolio / principal) ** (365 / averageWeighted) * 100 - 100;
-	const totalReturn = (portfolio / principal) * 100 - 100;
+		(parseFloat(portfolio) / principal) ** (365 / averageWeighted) * 100 - 100;
+	const totalReturn = (parseFloat(portfolio) / principal) * 100 - 100;
 
 	//S&P returns
 	const spyWeightedReturnAnnualized =
