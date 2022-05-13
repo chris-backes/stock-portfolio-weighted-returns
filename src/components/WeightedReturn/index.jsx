@@ -99,7 +99,7 @@ const WeightedReturn = ({ portfolio }) => {
 					"/" +
 					absoluteStart.slice(0, 4)}
 				. The current value of your portfolio is{" "}
-				{convertToMoney(portfolio.toString())}.
+				{convertToMoney(portfolio)}.
 			</p>
 			<p>
 				Your portfolio has returned {totalReturn.toFixed(2)}%
