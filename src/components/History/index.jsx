@@ -1,6 +1,5 @@
-import React, { useState } from "react";
+import React from "react";
 import { convertToMoney } from "../../utils/utils.js";
-import { grabStorage } from "../../utils/storage.js";
 import {
 	Table,
 	TableBody,
@@ -13,9 +12,9 @@ import {
 import DeleteIcon from "@mui/icons-material/Delete";
 import Input from "../Input";
 import styles from "./History.module.css";
+import { grabStorage } from '../../utils/storage'
 
-const History = ({ setPortfolio }) => {
-	const [transactionHistory, setTransactionHistory] = useState(grabStorage());
+const History = ({ setPortfolio, transactionHistory, setTransactionHistory }) => {
 
 	const displayData = transactionHistory.map((i) => {
 		const temp = convertToMoney(i.amount);

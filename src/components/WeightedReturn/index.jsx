@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import data from "../../assets/data.js";
 import { convertData } from "../../utils/convertData.js";
 import {
 	convertToMoney,
@@ -9,11 +8,10 @@ import {
 } from "../../utils/utils.js";
 import Explanation from "../Explanation";
 
-import styles from "./WeightedReturn.module.css";
+import "./WeightedReturn.module.css";
 
-const WeightedReturn = ({ portfolio }) => {
-
-	const [averageWeighted, principal] = convertData(data);
+const WeightedReturn = ({ portfolio, transactionHistory }) => {
+	const [averageWeighted, principal] = convertData(transactionHistory);
 
 	const [spyWeightedAmount, setSpyWeightedAmount] = useState("");
 	const [spyCurrAmount, setSpyCurrAmount] = useState("");
@@ -21,7 +19,7 @@ const WeightedReturn = ({ portfolio }) => {
 	const [nasdaqWeightedAmount, setNasdaqWeightedAmount] = useState("");
 	const [nasdaqCurrAmount, setNasdaqCurrAmount] = useState("");
 
-	const absoluteStart = getOldestDate(data.map((i) => i.deposit));
+	const absoluteStart = getOldestDate(transactionHistory.map((i) => i.deposit));
 	const weightedStart = getWeightedDate(Math.floor(averageWeighted));
 	const todayish = formatDate(
 		new Date(new Date().setDate(new Date().getDate() - 1))
