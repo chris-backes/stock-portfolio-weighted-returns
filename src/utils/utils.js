@@ -11,6 +11,7 @@ export function convertToMoney(num) {
 }
 
 export function formatDate(str) {
+	if (!(str instanceof Date)) return "2020-01-01"
 	if (str.getDay() === 0) str = new Date(str.setDate(str.getDate() - 2))
 	if (str.getDay() === 6) str = new Date(str.setDate(str.getDate() - 1))
 	let month = str.getMonth() + 1
@@ -36,7 +37,7 @@ export function getOldestDate(arr) {
 	let res = arr.map((i) => new Date(i));
 	res.sort((a, b) => a - b);
 
-	return formatDate(res[0]);
+	return res[0] ? formatDate(res[0]) : "2020-01-01";
 }
 
 export function setDate(deposit) {
