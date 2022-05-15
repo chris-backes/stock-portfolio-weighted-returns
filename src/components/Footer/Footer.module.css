@@ -22,3 +22,27 @@ a:hover {
 	font-size: 1.1em;
 	transition: 0.5s;
 }
+
+svg {
+	height: 3em;
+}
+.fillerCol{
+	fill: #48cae4;
+	transition: 0.5s;
+}
+svg:hover .fillerCol {
+	fill: #b23a48;
+	transition: 0.5s;
+}
+.auxiliaryCol {
+	fill: #b23a48;
+	transition: 0.5s;
+}
+svg:hover .auxCol {
+	fill: #48cae4;
+	transition: 0.5s;
+}
+
+.outlineCol{
+	fill: #424b54
+}

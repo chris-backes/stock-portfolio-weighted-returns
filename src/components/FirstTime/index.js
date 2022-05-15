@@ -53,10 +53,7 @@ function FirstTime({ open, setOpen }) {
 						the size of each deposit as a percentage of the whole.
 					</Typography>
 					<Typography id="how-to-modal-description-2" sx={{ mt: 2 }}>
-						Until you put that information in, the page is going to
-						look a bit weird probably. So let's get started by
-						inputting the current value of your portfolio, and just
-						one deposit.
+						Until you put that information in, we have gone ahead and put some fake data in for you. The current value of the portfolio can be overriden with the button on the right of  the rights 
 					</Typography>
 					<Button onClick={handleClose}>Close</Button>
 				</Box>

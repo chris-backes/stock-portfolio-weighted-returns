@@ -1,5 +1,7 @@
 # Annualized Weighted returns
 
+https://chris-backes.github.io/stock-portfolio-weighted-returns/
+
 This web app computes and returns the total returns of an investment portfolio, annualized and weighted according to the duration of each dollar in the investment account.
 
 The formula for annualized returns is:
