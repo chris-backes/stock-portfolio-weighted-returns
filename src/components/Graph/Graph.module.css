@@ -1,3 +1,7 @@
+canvas {
+    margin: 10px
+}
+
 .divEl {
     display: flex;
     justify-content: space-evenly;
@@ -6,12 +10,12 @@
 
 .btnEl {
 	background-color: var(--secondary) !important;
-	color: var(--tertiary) !important;
+	color: white !important;
     transition: 0.75s;
 }
 
 .btnEl:hover {
-    background-color: var(--tertiary) !important;
+    background-color: white !important;
 	color: var(--secondary) !important;
     transition: 0.75s
 }
